@@ -1,0 +1,55 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 20  # Hz
+
+    mecanum_cont:
+      type: mecanum_drive_controller/MecanumDriveController
+
+    joint_broad:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+mecanum_cont:
+  ros__parameters:
+    front_left_wheel_name: "front_left_wheel"
+    front_right_wheel_name: "front_right_wheel"
+    rear_left_wheel_name: "rear_left_wheel"
+    rear_right_wheel_name: "rear_right_wheel"
+
+    wheel_separation_x: 0.3  # Distance between front and rear axles
+    wheel_separation_y: 0.3  # Distance between left and right wheels
+    wheel_radius: 0.04
+
+    wheel_separation_x_multiplier: 1.0
+    wheel_separation_y_multiplier: 1.0
+    wheel_radius_multiplier: 1.0
+
+    publish_rate: 50.0
+    odom_frame_id: odom
+    base_frame_id: base_link
+    pose_covariance_diagonal: [ 0.001, 0.001, 0.001, 0.001, 0.001, 0.01 ]
+    twist_covariance_diagonal: [ 0.001, 0.001, 0.001, 0.001, 0.001, 0.01 ]
+
+    open_loop: true
+    enable_odom_tf: true
+
+    cmd_vel_timeout: 0.5
+    use_stamped_vel: false
+
+    # Velocity and acceleration limits
+    linear.x.has_velocity_limits: true
+    linear.x.has_acceleration_limits: true
+    linear.x.max_velocity: 0.3
+    linear.x.min_velocity: -0.3
+    linear.x.max_acceleration: 1.0
+
+    linear.y.has_velocity_limits: true
+    linear.y.has_acceleration_limits: true
+    linear.y.max_velocity: 0.3
+    linear.y.min_velocity: -0.3
+    linear.y.max_acceleration: 1.0
+
+    angular.z.has_velocity_limits: true
+    angular.z.has_acceleration_limits: true
+    angular.z.max_velocity: 1.0
+    angular.z.min_velocity: -1.0
+    angular.z.max_acceleration: 1.5

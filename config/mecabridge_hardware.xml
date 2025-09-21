@@ -1,0 +1,15 @@
+<!--
+  Copyright (c) 2024 MecaBridge Project
+  SPDX-License-Identifier: Apache-2.0
+-->
+
+<library path="mecabridge_hardware">
+    <class name="drive_arduino/MecaBridgeHardwareInterface"
+           type="mecabridge_hardware::MecaBridgeHardwareInterface"
+           base_class_type="hardware_interface::SystemInterface">
+        <description>
+            mecabridge Hardware Interface for ros2_control supporting differential, four-wheel, and mecanum drive
+            configurations with serial communication to Arduino-based mecabridgeFNG motor drivers
+        </description>
+    </class>
+</library>

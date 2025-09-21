@@ -1,0 +1,68 @@
+# mecabridge Differential Drive Controller Configuration
+# This configuration is for 2-wheel differential drive robots using mecabridge motor driver
+
+controller_manager:
+  ros__parameters:
+    update_rate: 20  # Hz - Control loop frequency
+
+    # Controller definitions
+    diff_cont:
+      type: diff_drive_controller/DiffDriveController
+
+    joint_broad:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+# Differential drive controller configuration
+diff_cont:
+  ros__parameters:
+    # Wheel joint names (must match URDF joint names)
+    left_wheel_names: [ "left_wheel" ]
+    right_wheel_names: [ "right_wheel" ]
+
+    # Robot geometry parameters (meters)
+    wheel_separation: 0.287  # Distance between wheel centers
+    wheel_radius: 0.033      # Wheel radius
+
+    # Calibration multipliers (adjust for mechanical tolerances)
+    wheel_separation_multiplier: 1.0
+    left_wheel_radius_multiplier: 1.0
+    right_wheel_radius_multiplier: 1.0
+
+    # Publishing configuration
+    publish_rate: 50.0        # Odometry publishing rate (Hz)
+    odom_frame_id: odom       # Odometry frame name
+    base_frame_id: base_link  # Robot base frame name
+    
+    # Odometry covariance (position: x, y, z, roll, pitch, yaw)
+    pose_covariance_diagonal: [ 0.001, 0.001, 0.001, 0.001, 0.001, 0.01 ]
+    # Velocity covariance (linear: x, y, z, angular: x, y, z)
+    twist_covariance_diagonal: [ 0.001, 0.001, 0.001, 0.001, 0.001, 0.01 ]
+
+    # Control configuration
+    open_loop: true           # Use open-loop control (no encoder feedback)
+    enable_odom_tf: true      # Publish odom->base_link transform
+    cmd_vel_timeout: 0.5      # Command timeout (seconds)
+    use_stamped_vel: false    # Use geometry_msgs/Twist (not TwistStamped)
+
+    # === Velocity and Acceleration Limits ===
+    
+    # Linear X velocity limits
+    linear.x.has_velocity_limits: true
+    linear.x.has_acceleration_limits: true
+    linear.x.has_jerk_limits: false
+    linear.x.max_velocity: 0.3      # m/s
+    linear.x.min_velocity: -0.3     # m/s  
+    linear.x.max_acceleration: 1.0  # m/s²
+    linear.x.max_jerk: 0.0
+    linear.x.min_jerk: 0.0
+
+    # Angular Z velocity limits  
+    angular.z.has_velocity_limits: true
+    angular.z.has_acceleration_limits: true
+    angular.z.has_jerk_limits: false
+    angular.z.max_velocity: 1.0      # rad/s
+    angular.z.min_velocity: -1.0     # rad/s
+    angular.z.max_acceleration: 1.5  # rad/s²
+    angular.z.min_acceleration: -1.5 # rad/s²
+    angular.z.max_jerk: 0.0
+    angular.z.min_jerk: 0.0

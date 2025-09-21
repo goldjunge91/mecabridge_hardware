@@ -1,0 +1,33 @@
+mecabridge_hardware:
+  serial_port: /dev/ttyACM0
+  state_publish_rate_hz: 50
+  wheel_radius: 0.048
+  wheel_separation_x: 0.20
+  wheel_separation_y: 0.18
+  encoder_ticks_per_rev: 1024
+  wheels:
+    front_left: { encoder_index: 0, joint_name: front_left_wheel_joint }
+    front_right: { encoder_index: 1, joint_name: front_right_wheel_joint }
+    rear_left: { encoder_index: 2, joint_name: rear_left_wheel_joint }
+    rear_right: { encoder_index: 3, joint_name: rear_right_wheel_joint }
+  servos:
+    positional:
+      joint_name: pan_servo_joint
+      min_rad: 0.0
+      max_rad: 3.14159
+    continuous:
+      joint_name: rot_servo_joint
+      max_velocity_rad_s: 10.0
+  escs:
+    left:
+      joint_name: esc_left_joint
+      esc_min_pwm: 1000
+      esc_max_pwm: 2000
+    right:
+      joint_name: esc_right_joint
+      esc_min_pwm: 1000
+      esc_max_pwm: 2000
+  features:
+    enable_servos: true
+    enable_escs: true
+    enable_diagnostics: false

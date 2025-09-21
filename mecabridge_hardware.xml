@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+  Copyright (c) 2024 MecaBridge Project
+  SPDX-License-Identifier: Apache-2.0
+-->
+
+<library path="mecabridge_hardware">
+    <class name="mecabridge_hardware/MecaBridgeHardware" type="mecabridge_hardware::MecaBridgeHardware"
+           base_class_type="hardware_interface::SystemInterface">
+        <description>
+            MecaBridge Hardware Interface: A ros2_control SystemInterface providing safe, low-latency
+            serial bridge for mecanum mobile bases with DC wheel motors, servos, and ESCs.
+            Features deterministic frame protocol with CRC integrity and watchdog safety.
+        </description>
+    </class>
+</library>

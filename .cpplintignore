@@ -1,0 +1,6 @@
+# Exclude build and generated artifacts
+build/
+cmake-build-debug/
+install/
+log/
+firmware/mecabridge_pico/build/

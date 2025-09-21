@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>mecabridge_hardware</name>
+  <version>1.0.0</version>
+  <description>MecaBridge: A ros2_control SystemInterface providing a safe, low-latency serial bridge for mecanum mobile bases with DC wheel motors, servos, and ESCs</description>
+  <maintainer email="developer@example.com">MecaBridge Developer</maintainer>
+  <author email="developer@example.com">MecaBridge Developer</author>
+  <license>BSD</license>
+  <url type="bugtracker">https://github.com/example/mecabridge_hardware/issues</url>
+  <url type="repository">https://github.com/example/mecabridge_hardware</url>
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <depend>hardware_interface</depend>
+  <depend>controller_manager</depend>
+  <depend>pluginlib</depend>
+  <depend>rclcpp</depend>
+  <depend>rclcpp_lifecycle</depend>
+  <depend>serial</depend>
+  <depend>ros2_controllers</depend>
+  <depend>mecanum_drive_controller</depend>
+  <depend>forward_command_controller</depend>
+  <depend>joint_state_broadcaster</depend>
+  <depend>std_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>sensor_msgs</depend>
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+  <test_depend>ament_cmake_gtest</test_depend>
+  <export>
+    <build_type>ament_cmake</build_type>
+    <hardware_interface plugin="${prefix}/mecabridge_hardware.xml" />
+  </export>
+</package>

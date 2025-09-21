@@ -1,0 +1,77 @@
+# mecabridge Hardware Interface Parameters
+# This file contains all configurable parameters for the mecabridge hardware interface
+# with detailed documentation and default values
+
+hardware_interface:
+  ros__parameters:
+    
+    # === Drive Configuration ===
+    # Supported drive types: "differential", "four_wheel", "mecanum"
+    drive_type: "differential"
+    
+    # Whether the setup includes encoder feedback
+    # Set to true if Arduino firmware provides encoder data
+    has_encoders: false
+    
+    # === Wheel Joint Names ===
+    # Joint names must match those defined in URDF
+    
+    # For differential drive (2 wheels)
+    left_wheel_name: "left_wheel"
+    right_wheel_name: "right_wheel"
+    
+    # For four wheel and mecanum drive (4 wheels)
+    front_left_wheel_name: "front_left_wheel"
+    front_right_wheel_name: "front_right_wheel"
+    rear_left_wheel_name: "rear_left_wheel"
+    rear_right_wheel_name: "rear_right_wheel"
+    
+    # === Serial Communication Parameters ===
+    # Serial device path - leave empty for auto-detection
+    # Auto-detection tries: /dev/ttyUSB0, /dev/ttyUSB1, /dev/ttyACM0
+    device: ""
+    
+    # Serial communication settings
+    baud_rate: 115200
+    timeout: 50  # milliseconds
+    
+    # Control loop frequency (Hz)
+    loop_rate: 20.0
+    
+    # === Velocity Limits ===
+    # Maximum linear velocity (m/s)
+    max_lin_vel: 0.3
+    
+    # Maximum angular velocity (rad/s)  
+    max_ang_vel: 1.0
+    
+    # === Drive-Specific Parameters ===
+    
+    # Mixing factor for differential drive (0.0 to 1.0)
+    # Controls how linear and angular velocities are combined
+    mix_factor: 0.5
+    
+    # Mecanum drive geometry (meters)
+    # Distance between front and rear axles
+    wheel_base: 0.3
+    
+    # Distance between left and right wheels
+    track_width: 0.3
+    
+    # === Encoder Parameters (only used if has_encoders = true) ===
+    # Encoder counts per full wheel revolution
+    enc_counts_per_rev: 1920
+    
+    # Wheel radius in meters (for encoder-based odometry)
+    wheel_radius: 0.05
+    
+    # === Advanced Parameters ===
+    # Connection retry attempts
+    connection_retries: 3
+    
+    # Delay after connection before sending commands (seconds)
+    connection_delay: 2.0
+    
+    # Command value clamping range (-100 to 100)
+    min_cmd_value: -100
+    max_cmd_value: 100

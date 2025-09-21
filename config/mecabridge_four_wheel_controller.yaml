@@ -1,0 +1,33 @@
+# mecabridge Four Wheel Independent Drive Controller Configuration
+# This configuration supports independent control of 4 wheels without specific kinematics
+# Suitable for custom drive algorithms or manual wheel control
+
+controller_manager:
+  ros__parameters:
+    update_rate: 20  # Hz - Control loop frequency
+
+    # Controller definitions
+    four_wheel_cont:
+      type: forward_command_controller/ForwardCommandController
+
+    joint_broad:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+# Four wheel independent controller configuration
+four_wheel_cont:
+  ros__parameters:
+    # Joint names for the four wheels
+    joints:
+      - front_left_wheel
+      - front_right_wheel
+      - rear_left_wheel
+      - rear_right_wheel
+    
+    # Interface type for velocity commands
+    interface_name: velocity
+    
+    # Command timeout
+    cmd_vel_timeout: 0.5
+    
+    # Publishing configuration
+    publish_rate: 50.0

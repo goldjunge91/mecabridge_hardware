@@ -1,0 +1,43 @@
+mecabridge_hardware:
+  ros__parameters:
+    # Hardware configuration
+    serial_port: "/dev/ttyUSB0"
+    drive_type: "mecanum"
+    
+    # Joint names for mecanum drive
+    wheel_joints:
+      - "front_left_wheel"
+      - "front_right_wheel"
+      - "rear_left_wheel"
+      - "rear_right_wheel"
+    
+    # Feature enables
+    features:
+      enable_servos: true
+      enable_escs: true
+      enable_diagnostics: true
+    
+    # Servo configuration
+    servos:
+      positional:
+        joint_name: "servo_pos"
+        min_angle_rad: -1.57
+        max_angle_rad: 1.57
+      continuous:
+        joint_name: "servo_cont"
+        max_velocity: 5.0
+    
+    # ESC configuration  
+    escs:
+      left:
+        joint_name: "esc_left"
+        min_value: -1.0
+        max_value: 1.0
+      right:
+        joint_name: "esc_right"
+        min_value: -1.0
+        max_value: 1.0
+    
+    # Timing configuration
+    update_rate_hz: 50
+    watchdog_timeout_ms: 150

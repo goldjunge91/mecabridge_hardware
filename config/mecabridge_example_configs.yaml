@@ -1,0 +1,152 @@
+# mecabridge Hardware Interface Example Configurations
+# This file demonstrates all available configuration options for different drive types
+
+# =============================================================================
+# DIFFERENTIAL DRIVE CONFIGURATION EXAMPLE
+# =============================================================================
+differential_drive_example:
+  hardware_interface:
+    ros__parameters:
+      # Drive configuration
+      drive_type: "differential"
+      has_encoders: false
+      
+      # Wheel joint names
+      left_wheel_name: "left_wheel"
+      right_wheel_name: "right_wheel"
+      
+      # Serial communication
+      device: ""  # Auto-detect
+      baud_rate: 115200
+      timeout: 50
+      loop_rate: 20.0
+      
+      # Velocity limits
+      max_lin_vel: 0.3
+      max_ang_vel: 1.0
+      mix_factor: 0.5
+
+# =============================================================================
+# MECANUM DRIVE CONFIGURATION EXAMPLE  
+# =============================================================================
+mecanum_drive_example:
+  hardware_interface:
+    ros__parameters:
+      # Drive configuration
+      drive_type: "mecanum"
+      has_encoders: false
+      
+      # Wheel joint names
+      front_left_wheel_name: "front_left_wheel"
+      front_right_wheel_name: "front_right_wheel"
+      rear_left_wheel_name: "rear_left_wheel"
+      rear_right_wheel_name: "rear_right_wheel"
+      
+      # Serial communication
+      device: "/dev/ttyUSB0"  # Specific device
+      baud_rate: 115200
+      timeout: 50
+      loop_rate: 20.0
+      
+      # Velocity limits
+      max_lin_vel: 0.25
+      max_ang_vel: 0.8
+      
+      # Mecanum geometry
+      wheel_base: 0.3
+      track_width: 0.3
+
+# =============================================================================
+# FOUR WHEEL INDEPENDENT CONFIGURATION EXAMPLE
+# =============================================================================
+four_wheel_independent_example:
+  hardware_interface:
+    ros__parameters:
+      # Drive configuration
+      drive_type: "four_wheel"
+      has_encoders: false
+      
+      # Wheel joint names
+      front_left_wheel_name: "fl_wheel"
+      front_right_wheel_name: "fr_wheel"
+      rear_left_wheel_name: "rl_wheel"
+      rear_right_wheel_name: "rr_wheel"
+      
+      # Serial communication
+      device: ""
+      baud_rate: 57600  # Different baud rate
+      timeout: 100      # Longer timeout
+      loop_rate: 10.0   # Lower frequency
+      
+      # Velocity limits
+      max_lin_vel: 0.5
+      max_ang_vel: 1.5
+
+# =============================================================================
+# ENCODER-ENABLED DIFFERENTIAL DRIVE EXAMPLE
+# =============================================================================
+differential_with_encoders_example:
+  hardware_interface:
+    ros__parameters:
+      # Drive configuration
+      drive_type: "differential"
+      has_encoders: true
+      
+      # Wheel joint names
+      left_wheel_name: "left_wheel"
+      right_wheel_name: "right_wheel"
+      
+      # Serial communication
+      device: "/dev/ttyACM0"
+      baud_rate: 115200
+      timeout: 50
+      loop_rate: 50.0  # Higher frequency for encoder feedback
+      
+      # Velocity limits
+      max_lin_vel: 0.4
+      max_ang_vel: 1.2
+      mix_factor: 0.6
+      
+      # Encoder parameters
+      enc_counts_per_rev: 1920
+      wheel_radius: 0.033
+
+# =============================================================================
+# HIGH PERFORMANCE MECANUM WITH ENCODERS EXAMPLE
+# =============================================================================
+high_performance_mecanum_example:
+  hardware_interface:
+    ros__parameters:
+      # Drive configuration
+      drive_type: "mecanum"
+      has_encoders: true
+      
+      # Wheel joint names
+      front_left_wheel_name: "front_left_wheel"
+      front_right_wheel_name: "front_right_wheel"
+      rear_left_wheel_name: "rear_left_wheel"
+      rear_right_wheel_name: "rear_right_wheel"
+      
+      # Serial communication
+      device: ""
+      baud_rate: 230400  # High speed communication
+      timeout: 25        # Fast timeout
+      loop_rate: 100.0   # High frequency control
+      
+      # Velocity limits
+      max_lin_vel: 0.6
+      max_ang_vel: 2.0
+      
+      # Mecanum geometry (larger robot)
+      wheel_base: 0.4
+      track_width: 0.35
+      
+      # Encoder parameters
+      enc_counts_per_rev: 3840  # High resolution encoders
+      wheel_radius: 0.05
+      
+      # Advanced parameters
+      connection_retries: 5
+      connection_delay: 1.0
+      min_cmd_value: -100
+      max_cmd_value: 100
