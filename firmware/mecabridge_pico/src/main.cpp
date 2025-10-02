@@ -13,6 +13,8 @@
 constexpr uint32_t WATCHDOG_TIMEOUT_MS = 150;
 constexpr uint32_t STATE_FRAME_INTERVAL_MS = 20;  // 50Hz state frame rate
 
+using namespace mecabridge;
+
 // Global state
 FrameParser parser;
 ActuatorController actuators;

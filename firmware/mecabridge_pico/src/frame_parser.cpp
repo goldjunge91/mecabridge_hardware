@@ -133,7 +133,7 @@ ParseResult FrameParser::parseByte(uint8_t byte, Frame & frame)
       state_ = ParseState::WAITING_CRC_LOW;
       return ParseResult::NEED_MORE_DATA;
 
-    case ParseState::WAITING_CRC_LOW:
+    case ParseState::WAITING_CRC_LOW: {
       current_frame_.crc16 |= byte;
 
       // Verify CRC
@@ -148,6 +148,7 @@ ParseResult FrameParser::parseByte(uint8_t byte, Frame & frame)
       frame = current_frame_;
       reset();
       return ParseResult::FRAME_COMPLETE;
+    }
 
     default:
       reset();

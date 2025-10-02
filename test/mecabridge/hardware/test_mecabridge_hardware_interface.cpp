@@ -14,36 +14,33 @@
  * limitations under the License.
  */
 
-#include <gtest/gtest.h>
-#include <gmock/gmock.h>
-#include <hardware_interface/resource_manager.hpp>
 #include <ament_index_cpp/get_package_share_directory.hpp>
+#include <gmock/gmock.h>
+#include <gtest/gtest.h>
+#include <hardware_interface/resource_manager.hpp>
+#include <rclcpp/rclcpp.hpp>
 #include <rcpputils/filesystem_helper.hpp>
 #include <sstream>
-#include <rclcpp/rclcpp.hpp>
 #include <string>
 #include <vector>
 
-TEST(TestMecabridgeHardwareInterface, load_urdf_and_check_interfaces)
-{
+TEST(TestMecabridgeHardwareInterface, load_urdf_and_check_interfaces) {
   const auto share_dir = ament_index_cpp::get_package_share_directory("mecabridge_hardware");
-  const auto config_path = rcpputils::fs::path(share_dir) /
-                           "test" /
-                           "mecabridge" /
-                           "hardware" /
-                           "test_mecabridge_hardware_interface.yaml";
-  ASSERT_TRUE(rcpputils::fs::exists(config_path)) << "Test config missing: " << config_path.string();
+  const auto config_path = rcpputils::fs::path(share_dir) / "test" / "mecabridge" / "hardware" /
+    "test_mecabridge_hardware_interface.yaml";
+  ASSERT_TRUE(rcpputils::fs::exists(config_path))
+    << "Test config missing: " << config_path.string();
   const auto config_file = config_path.string();
 
   std::ostringstream urdf;
   urdf <<
-      R"(<robot name="TestRobot">
+    R"(<robot name="TestRobot">
   <ros2_control name="MecaBridgeSystem" type="system">
     <hardware>
       <plugin>mecabridge_hardware/MecaBridgeHardware</plugin>
       <param name="config_file">)"
        << config_file <<
-      R"(</param>
+    R"(</param>
     </hardware>
     <joint name="front_left_wheel_joint">
       <command_interface name="velocity"/>
@@ -71,12 +68,11 @@ TEST(TestMecabridgeHardwareInterface, load_urdf_and_check_interfaces)
 
   rclcpp::init(0, nullptr);
 
-  try
-  {
+  try {
     hardware_interface::ResourceManager rm(urdf_string);
 
-    const auto &command_interfaces = rm.command_interface_keys();
-    const auto &state_interfaces = rm.state_interface_keys();
+    const auto & command_interfaces = rm.command_interface_keys();
+    const auto & state_interfaces = rm.state_interface_keys();
 
     ASSERT_EQ(command_interfaces.size(), 8u);
     ASSERT_EQ(state_interfaces.size(), 12u);
@@ -86,33 +82,21 @@ TEST(TestMecabridgeHardwareInterface, load_urdf_and_check_interfaces)
     EXPECT_THAT(
       command_interfaces,
       ElementsAre(
-        "front_left_wheel_joint/velocity",
-        "front_right_wheel_joint/velocity",
-        "rear_left_wheel_joint/velocity",
-        "rear_right_wheel_joint/velocity",
-        "pan_servo_joint/position",
-        "rot_servo_joint/velocity",
-        "esc_left_joint/velocity",
-        "esc_right_joint/velocity"));
+        "front_left_wheel_joint/velocity", "front_right_wheel_joint/velocity",
+        "rear_left_wheel_joint/velocity", "rear_right_wheel_joint/velocity",
+        "pan_servo_joint/position", "rot_servo_joint/velocity",
+        "esc_left_joint/velocity", "esc_right_joint/velocity"));
 
     EXPECT_THAT(
       state_interfaces,
       ElementsAre(
-        "front_left_wheel_joint/velocity",
-        "front_left_wheel_joint/position",
-        "front_right_wheel_joint/velocity",
-        "front_right_wheel_joint/position",
-        "rear_left_wheel_joint/velocity",
-        "rear_left_wheel_joint/position",
-        "rear_right_wheel_joint/velocity",
-        "rear_right_wheel_joint/position",
-        "pan_servo_joint/position",
-        "rot_servo_joint/velocity",
-        "esc_left_joint/velocity",
-        "esc_right_joint/velocity"));
-  }
-  catch (const std::exception &e)
-  {
+        "front_left_wheel_joint/velocity", "front_left_wheel_joint/position",
+        "front_right_wheel_joint/velocity", "front_right_wheel_joint/position",
+        "rear_left_wheel_joint/velocity", "rear_left_wheel_joint/position",
+        "rear_right_wheel_joint/velocity", "rear_right_wheel_joint/position",
+        "pan_servo_joint/position", "rot_servo_joint/velocity",
+        "esc_left_joint/velocity", "esc_right_joint/velocity"));
+  } catch (const std::exception & e) {
     FAIL() << "Exception thrown: " << e.what();
   }
 

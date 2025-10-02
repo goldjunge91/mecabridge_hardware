@@ -17,7 +17,6 @@
 #ifndef MECABRIDGE_HARDWARE__MECABRIDGE_HARDWARE_HPP_
 #define MECABRIDGE_HARDWARE__MECABRIDGE_HARDWARE_HPP_
 
-
 #pragma once
 
 #include <string>
@@ -50,38 +49,30 @@ public:
   MecaBridgeHardware() = default;
   ~MecaBridgeHardware() override = default;
 
-  hardware_interface::CallbackReturn on_init(
-    const hardware_interface::HardwareInfo & info) override;
+  hardware_interface::CallbackReturn on_init(const hardware_interface::HardwareInfo& info) override;
   std::vector<hardware_interface::StateInterface> export_state_interfaces() override;
   std::vector<hardware_interface::CommandInterface> export_command_interfaces() override;
 
-  hardware_interface::CallbackReturn on_configure(const rclcpp_lifecycle::State & previous_state)
-  override;
-  hardware_interface::CallbackReturn on_cleanup(const rclcpp_lifecycle::State & previous_state)
-  override;
-  hardware_interface::CallbackReturn on_activate(const rclcpp_lifecycle::State & previous_state)
-  override;
-  hardware_interface::CallbackReturn on_deactivate(const rclcpp_lifecycle::State & previous_state)
-  override;
+  hardware_interface::CallbackReturn on_configure(const rclcpp_lifecycle::State& previous_state) override;
+  hardware_interface::CallbackReturn on_cleanup(const rclcpp_lifecycle::State& previous_state) override;
+  hardware_interface::CallbackReturn on_activate(const rclcpp_lifecycle::State& previous_state) override;
+  hardware_interface::CallbackReturn on_deactivate(const rclcpp_lifecycle::State& previous_state) override;
 
-  hardware_interface::return_type read(
-    const rclcpp::Time & time,
-    const rclcpp::Duration & period) override;
-  hardware_interface::return_type write(
-    const rclcpp::Time & time,
-    const rclcpp::Duration & period) override;
+  hardware_interface::return_type read(const rclcpp::Time& time, const rclcpp::Duration& period) override;
+  hardware_interface::return_type write(const rclcpp::Time& time, const rclcpp::Duration& period) override;
 
 private:
-  // Deterministic joint ordering: 4 wheels (vel), 1 positional servo (pos), 1 continuous servo (vel), 2 ESC (vel normalized)
-  std::vector<double> hw_states_{};   // size 8-? state interfaces
-  std::vector<double> hw_commands_{}; // size depends on interfaces
+  // Deterministic joint ordering: 4 wheels (vel), 1 positional servo (pos), 1 continuous servo (vel), 2 ESC (vel
+  // normalized)
+  std::vector<double> hw_states_{};    // size 8-? state interfaces
+  std::vector<double> hw_commands_{};  // size depends on interfaces
 
   mecabridge::config::Config cfg_;
 
   // Protocol and serial communication
   std::unique_ptr<mecabridge::serial::SerialBackend> serial_backend_;
   mecabridge::safety::Watchdog watchdog_;
-  uint16_t command_sequence_{0};
+  uint16_t command_sequence_{ 0 };
   std::chrono::steady_clock::time_point last_state_time_;
 
   // Frame buffers
@@ -97,10 +88,10 @@ private:
   // Helper methods for protocol integration
   hardware_interface::return_type readStateFrame();
   hardware_interface::return_type writeCommandFrame();
-  void updateStateFromFrame(const mecabridge::protocol::StateFramePayload & state_payload);
-  void buildCommandFromState(mecabridge::protocol::CommandFramePayload & command_payload);
+  void updateStateFromFrame(const mecabridge::protocol::StateFramePayload& state_payload);
+  void buildCommandFromState(mecabridge::protocol::CommandFramePayload& command_payload);
   void logLatencyStats();
 };
 
-} // namespace mecabridge_hardware
+}  // namespace mecabridge_hardware
 #endif  // MECABRIDGE_HARDWARE__MECABRIDGE_HARDWARE_HPP_

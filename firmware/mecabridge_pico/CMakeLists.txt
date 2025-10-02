@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.13)
 include(pico_sdk_import.cmake)
-project(Testing C CXX)
+project(MecaBridge C CXX)
 
 # Standards
 set(CMAKE_C_STANDARD 11)
@@ -13,10 +13,11 @@ add_executable(MecaBridge
   src/main.cpp
   src/frame_parser.cpp
   src/actuators.cpp
+  src/enc.cpp
+  src/esc_servo.cpp
+  src/motors.cpp
+  src/term.cpp
 )
-
-# enable usb output
-pico_enable_stdio_usb(MecaBridge 1)
 
 # Headers live in src/ (e.g., config.h)
 target_include_directories(MecaBridge PRIVATE src)
@@ -43,9 +44,12 @@ pico_enable_stdio_uart(MecaBridge 0)
 # Create UF2/ELF/bin
 pico_add_extra_outputs(MecaBridge)
 
+# Allow `make build` in the generated build directory to build the firmware
+add_custom_target(build DEPENDS MecaBridge)
+
 # --- convenience targets ---
 add_custom_target(flash
   COMMAND picotool load -f ${CMAKE_CURRENT_BINARY_DIR}/MecaBridge.uf2
   DEPENDS MecaBridge
-  COMMENT "Flashing Testing.uf2 via picotool"
+  COMMENT "Flashing MecaBridge.uf2 via picotool"
 )
