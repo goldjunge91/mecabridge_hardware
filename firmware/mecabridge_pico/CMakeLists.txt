@@ -19,6 +19,9 @@ add_executable(MecaBridge
   src/term.cpp
 )
 
+# enable usb output
+pico_enable_stdio_usb(MecaBridge 1)
+
 # Headers live in src/ (e.g., config.h)
 target_include_directories(MecaBridge PRIVATE src)
 
