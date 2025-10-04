@@ -1,4 +1,6 @@
-# MecaBridge Hardware Interface Documentation
+<!-- TODO: need update -->
+
+<!-- # MecaBridge Hardware Interface Documentation
 
 ## Overview
 
@@ -906,4 +908,4 @@ Das System beinhaltet umfassende Unit-Tests mit Mock-Injection:
 ---
 
 *Diese Dokumentation wird neben dem Codebase gepflegt. Bitte aktualisieren Sie sie bei wesentlichen Änderungen am
-System.*
+System.* -->

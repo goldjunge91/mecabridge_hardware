@@ -1,4 +1,5 @@
-
+<!-- TODO: need update -->
+<!-- 
 # MecaBridge Hardware Interface
 
 ROS 2 (ros2_control) hardware interface and Pico firmware bridge for a mecanum-base robot with four DC wheels, two servos, and two ESC channels. The project targets a Raspberry Pi 4B (controller manager) connected to a Raspberry Pi Pico (low-level PWM and encoder IO) over a deterministic serial link.
@@ -93,7 +94,6 @@ Embed the hardware in URDF/Xacro:
     <command_interface name="velocity"/>
     <state_interface name="velocity"/>
   </joint>
-  <!-- repeat for remaining wheel, servo, and ESC joints -->
 </ros2_control>
 ```
 
@@ -127,7 +127,6 @@ mecanum_controller:
     odom_frame_id: odom
     enable_odom_tf: true
 ```
-
 Launch flow (pseudo): load robot description, start `ros2_control_node`, spawn broadcasters/controllers, start latency diagnostics if required.
 
 ## 6. Firmware Bring-Up
@@ -276,4 +275,4 @@ firmware/mecabridge_pico/
 
 
 
-docker compose exec -T ros2_drive_dev bash -c "colcon build --packages-select drive_arduino mecabridge_hardware && colcon test --packages-select mecabridge_hardware && colcon test-result --all --verbose" *> test_results_5.log
+docker compose exec -T ros2_drive_dev bash -c "colcon build --packages-select drive_arduino mecabridge_hardware && colcon test --packages-select mecabridge_hardware && colcon test-result --all --verbose" *> test_results_5.log -->
